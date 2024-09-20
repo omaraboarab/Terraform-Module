@@ -1,11 +1,10 @@
 #!/bin/bash
 sudo yum update -y
 sudo yum install -y docker
-sudo yum install -y yum-utils
-sudo chmod 666 /var/run/docker.sock
+sudo systemctl enable docker
+sudo systemctl start docker
 sudo chown $USER /var/run/docker.sock
+sudo chmod 666 /var/run/docker.sock
 sudo usermod -aG docker ec2-user
-systemctl enable docker
-systemctl start docker
-sleep 10
+sleep 30
 docker run -p 8080:80 -d nginx
